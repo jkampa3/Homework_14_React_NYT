@@ -1,0 +1,9 @@
+# node modules
+node_modules
+node_modules/*
+client/node_modules
+client/node_modules/*
+
+# npm package locks
+package-lock.json
+client/package-lock.json
