@@ -16,12 +16,16 @@ if (process.env.NODE_ENV === "production") {
 
 //mongoose
 mongoose.Promise = Promise;
-var db = mongoose.connection;
-db.on("error", function(error) {
-    console.log("Mongoose Error: ", error);
+const db = mongoose.connection;
+db.on("error", function (error) {
+  console.log("Mongoose Error: ", error);
 });
-var mongoConfig = process.env.MONGODB_URI || "mongodb://localhost/ReactNYTSearch";
-mongoose.connect(mongoConfig);
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/ReactNYTSearch",
+  {
+    useMongoClient: true
+  }
+);
 
 //express for html files
 app.use(express.static('./public'));
@@ -31,6 +35,6 @@ app.use(routes);
 
 
 // Start the API server
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
